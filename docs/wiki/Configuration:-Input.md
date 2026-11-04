@@ -291,6 +291,8 @@ Valid output names are the same as the ones used for output configuration.
 
 Settings specific to `tablet`:
 
+- `preserve-mouse-position-on-proximity-out`: keeps the mouse pointer at its previous position when the pen leaves tablet proximity. By default, the pointer moves to the pen's last position. This setting can be changed through configuration reloads.
+
 - `map-to-focused-output`: <sup>Since: 26.04</sup> will map the tablet to the focused output, takes precedence over `map-to-output`.
 
 - `map-to-focused-window`: <sup>Since: next release</sup> will map the tablet to the focused window's geometry, takes precedence over `map-to-focused-output` and `map-to-output`.

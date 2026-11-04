@@ -369,6 +369,8 @@ impl From<TapButtonMap> for input::TapButtonMap {
 #[derive(knuffel::Decode, Debug, Default, Clone, PartialEq)]
 pub struct Tablet {
     #[knuffel(child)]
+    pub preserve_mouse_position_on_proximity_out: bool,
+    #[knuffel(child)]
     pub off: bool,
     #[knuffel(child, unwrap(arguments))]
     pub calibration_matrix: Option<Vec<f32>>,

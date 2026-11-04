@@ -4076,12 +4076,22 @@ impl State {
                     tool.proximity_out(self, &tablet::tool::ProximityOutEvent { serial, time });
                     tool.frame(self, time);
 
-                    // Move the mouse pointer here to avoid discontinuity.
+                    let preserve_mouse_position = self
+                        .niri
+                        .config
+                        .borrow()
+                        .input
+                        .tablet
+                        .preserve_mouse_position_on_proximity_out;
+
+                    // Unless configured otherwise, move the mouse pointer here to avoid discontinuity.
                     //
                     // Plus, Wayland SDL2 currently warps the pointer into some weird
                     // location on proximity out, so this should help it a little.
-                    if let Some(pos) = self.niri.tablet_cursor_location {
-                        self.move_cursor(pos);
+                    if !preserve_mouse_position {
+                        if let Some(pos) = self.niri.tablet_cursor_location {
+                            self.move_cursor(pos);
+                        }
                     }
 
                     self.niri.pointer_visibility = PointerVisibility::Visible;
